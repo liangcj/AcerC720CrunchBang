@@ -70,9 +70,11 @@ These are more personal preferences. Once the touchpad is working via the above 
 
 * Edit autostart config file: change `touchpad` to `trackpad`
 
-Fixing wireless
+Fixing wireless, synaptics, and others
 ---
-Wireless works at first but then once kernel is updated (as part of touchpad fix), the wireless icon in the toolbar disappears (though wireless still works). To bring it back (the program is `nm-applet`), just select a theme other than Waldorf. This needs to be done as both normal user and sudo though. In terminal:
+Once the kernel is updated, [GTK+](http://en.wikipedia.org/wiki/GTK%2B) (graphics-related toolkit) causes issues with the default Waldorf theme, leading to segmentation faults for some programs. Notably, `nm-applet` (the wireless icon in the taskbar) and `synaptics` (package manager) are among the affected.
+
+Wireless still works, but it would be nice to have the `nm-applet` GUI to make changes. To bring it back (and fix segfaults for other programs too), just select a theme other than Waldorf. This needs to be done as both normal user and sudo though. In terminal:
 ```
 lxappearance
 ```
@@ -80,11 +82,11 @@ Select a theme other than Waldorf, apply and close
 ```
 sudo lxappearance
 ``` 
-Select a theme other than Waldorf, apply and close.
+Select a theme other than Waldorf, apply and close. `alt-F2` and then run `nm-applet`.
 
-Not a very elegant solution but it works. This also has the added benefit of fixing `synaptic`, which for some reason also stops working after the kernel upgrade.
+Not a very elegant solution but it works. This also has the added benefit of fixing `synaptic` and other programs. For more technical details see the second link below.
 
-Source: [CrunchBang forums](http://crunchbang.org/forums/viewtopic.php?id=27765)
+Source: [CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?id=27765) and [another CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?pid=310612#p310612)
 
 Fixing suspend
 ---
