@@ -10,5 +10,14 @@
 # bits.
 #
 # By default this script does nothing.
+echo EHCI > /proc/acpi/wakeup
+echo HDEF > /proc/acpi/wakeup
+echo XHCI > /proc/acpi/wakeup
+echo LID0 > /proc/acpi/wakeup
+echo TPAD > /proc/acpi/wakeup
+echo TSCR > /proc/acpi/wakeup
+echo 300 > /sys/class/backlight/intel_backlight/brightness
+rfkill block bluetooth
+/etc/init.d/bluetooth stop
 
 exit 0
