@@ -1,6 +1,6 @@
-AcerC720CrunchBang
-==================
-Installing and configuring [CrunchBang](http://crunchbang.org/) Linux on the [Acer C720](http://www.theverge.com/2013/10/23/4948120/acer-c720-chromebook-review) [Chromebook](http://en.wikipedia.org/wiki/Chromebook)
+CrunchBang Linux on the Acer C720 Chromebook
+===
+This is a guide for installing and configuring [CrunchBang](http://crunchbang.org/) Linux on the [Acer C720](http://www.theverge.com/2013/10/23/4948120/acer-c720-chromebook-review) [Chromebook](http://en.wikipedia.org/wiki/Chromebook). The majority of the information is combined from various sources and I created this as a central reference. Issues and pull requests are welcome.
 
 Putting Chromebook in developer mode
 ---
@@ -125,3 +125,15 @@ Steps:
 The last step by itself will kind of fix suspend in that the first time you close the lid everything will come back fine when you open the lid back up. However, if you then close the lid again, it will only lock the screen rather than suspend. Plus, you may also have issues trying to shut down the system. The first two steps will fix this problem to allow "unlimited suspends and resumes". Others reported issues with USB and sound after resuming. Mine worked fine, possibly because I am on a newer kernel (3.12).
 
 Source: [Pedro Larroy's Google+ post](https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa) (make sure to check Mike Lim's comments too) and [Arch Linux forums](https://bbs.archlinux.org/viewtopic.php?pid=1370148)
+
+Brightness keyboard shortcuts
+---
+Install `xbacklight`
+
+Sound keyboard shortcuts
+---
+`amixer`
+
+Keyboard shortcuts for Page-Up, Page-Down, Home, End, Delete
+---
+`xdotool`
