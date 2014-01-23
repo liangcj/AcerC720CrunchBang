@@ -128,12 +128,15 @@ Source: [Pedro Larroy's Google+ post](https://plus.google.com/+PedroLarroy/posts
 
 Brightness keyboard shortcuts
 ---
-Install `xbacklight`
+There are two options I know of: `xrandr` and `xbacklight`. According to `xrandr`'s man page and my own testing, `xbacklight` **is preferred**. This is because `xrandr` only adjusts brightness via software while `xbacklight` actually makes hardware changes. One way to see this is to compare `xrandr --output 0x46 --brightness 0` with `xbacklight -set 0`. Both claim to set the rightness to zero but `xrandr` only makes everything black while it is clear that the backlight is still on. It appears to only change the gamma settings without physically dimming the backlight. The `xbacklight` method actually turns off the backlight completely.
+
+To try `xrandr` for yourself, replace `0x46` with your monitor's identification code (which can be found with `xrandr --verbose`). One other way to verify that `xbacklight` is better is to look at how [] changes. Its value does nto change when you 
+
 
 Sound keyboard shortcuts
 ---
 `amixer`
 
-Keyboard shortcuts for Page-Up, Page-Down, Home, End, Delete
+Keyboard shortcuts for Page-Up, Page-Down, Home, End, Delete, Caps Lock
 ---
 `xdotool`
