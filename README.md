@@ -64,13 +64,30 @@ CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kerne
 * Reboot
 * Run the c720crunchbangtp script
 
-Source: [Comment in reddit.com/r/CrunchBang](http://www.reddit.com/r/CrunchBang/comments/1qogy6/crunchbang_on_the_acer_c720_chromebookso_close/) (see post by user ngorgi). I also have copied his modified script to this repo in case it gets taken down.
+Source: [Comment in reddit.com/r/CrunchBang](http://www.reddit.com/r/CrunchBang/comments/1qogy6/crunchbang_on_the_acer_c720_chromebookso_close/) (see post by user ngorgi). I also have copied the user's modified script to this repo in case it gets taken down.
 
 Improving the touchpad performance
 ---
-These are more personal preferences. Once the touchpad is working via the above steps, some may find the touchpad to still be a bit unresponsive. Here are the `synclient` parameters I use.
+These are more personal preferences. Once the touchpad is working via the above steps, some may find the touchpad to still be a bit unresponsive. You can test out touchpad settings (all changes disappear after a restart) using `synclient` in the terminal. Type `synclient` to see a list of touchpad settings and use `man synaptics` for more detailed descriptions of what each setting does. Temporarily try out a setting using e.g. `synclient FingerHigh=10`.
 
-* Edit autostart config file: change `touchpad` to `trackpad`
+Once you figure out your preferred synclient settings, list them in `/home/cjl/.config/openbox/autostart` along with the  existing synclient calls (around line 52).
+
+* Change `touchpad` to `trackpad` on line 51 (if necessary)
+* Change `VertEdgeScroll=1` to `VertEdgeScroll=0`. This will disable edge scrolling. I prefer two-finger scrolling.
+* Add the following:
+
+    ````
+    synclient AreaRightEdge=850 &
+    synclient AreaLeftEdge=50 &
+    synclient TapButton1=1 &
+    synclient TapButton2=3 &
+    synclient TapButton3=2 &
+    synclient FingerHigh=10 &
+    synclient FingerLow=10 &
+    ````
+  The first two options disable the left and right edge slivers. I found this helped with reducing accidental touchpad clicks without compromising usability. The middle three options map singe, double, triple finger taps to what are typically left, right, middle mouse buttons respectively. The last two options adjust touchpad sensitivity to my liking.
+
+See the `autostart` file in this repository for the full, edited file with my preferred settings. 
 
 Fixing wireless, synaptics, and others
 ---
