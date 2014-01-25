@@ -193,6 +193,7 @@
         <wrap>no</wrap>
       </action>
     </keybind>
+<!--
     <keybind key="C-A-Up">
       <action name="GoToDesktop">
         <to>up</to>
@@ -205,6 +206,7 @@
         <wrap>no</wrap>
       </action>
     </keybind>
+-->
     <keybind key="S-A-Left">
       <action name="SendToDesktop">
         <to>left</to>
@@ -455,6 +457,12 @@
     <keybind key="W-Up">
       <action name="GrowToEdgeNorth"/>
     </keybind>
+    <keybind key="W-A-Up">
+      <action name="Maximize"/>
+    </keybind>
+    <keybind key="W-A-Down">
+      <action name="Unmaximize"/>
+    </keybind>
     <keybind key="W-A-Left">
       <action name="Execute">
         <command>cb-aerosnap --left</command>
@@ -463,6 +471,62 @@
     <keybind key="W-A-Right">
       <action name="Execute">
         <command>cb-aerosnap --right</command>
+      </action>
+    </keybind>
+    <!-- Keyboard shortcuts -->
+    <keybind key="W-F6">
+      <action name="Execute">
+        <command>xbacklight - 10</command>
+      </action>
+    </keybind>
+    <keybind key="W-F7">
+      <action name="Execute">
+        <command>xbacklight + 10</command>
+      </action>
+    </keybind>
+    <keybind key="W-F8">
+      <action name="Execute">
+        <command>amixer sset Master toggle</command>
+      </action>
+    </keybind>
+    <keybind key="W-F9">
+      <action name="Execute">
+        <command>amixer sset Master 5%- unmute</command>
+      </action>
+    </keybind>
+    <keybind key="W-F10">
+      <action name="Execute">
+        <command>amixer sset Master 5%+ unmute</command>
+      </action>
+    </keybind>
+    <keybind key="A-Up">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Page_Up</command>
+      </action>
+    </keybind>
+    <keybind key="A-Down">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Page_Down</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-Up">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Home</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-Down">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers End</command>
+      </action>
+    </keybind>
+    <keybind key="S-BackSpace">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Delete</command>
+      </action>
+    </keybind>
+    <keybind key="W-F4">
+      <action name="Execute">
+        <command>xdotool key Caps_Lock</command>
       </action>
     </keybind>
   </keyboard>
@@ -763,12 +827,14 @@
       </mousebind>
     </context>
     <context name="Desktop">
+    <!--
       <mousebind button="Up" action="Click">
         <action name="GoToDesktop"><to>previous</to></action>
       </mousebind>
       <mousebind button="Down" action="Click">
         <action name="GoToDesktop"><to>next</to></action>
       </mousebind>
+    -->
       <mousebind button="A-Up" action="Click">
         <action name="GoToDesktop">
           <to>previous</to>
