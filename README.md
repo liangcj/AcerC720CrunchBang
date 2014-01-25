@@ -126,17 +126,114 @@ The last step by itself will kind of fix suspend in that the first time you clos
 
 Source: [Pedro Larroy's Google+ post](https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa) (make sure to check Mike Lim's comments too) and [Arch Linux forums](https://bbs.archlinux.org/viewtopic.php?pid=1370148)
 
-Brightness keyboard shortcuts
----
-There are two options I know of: `xrandr` and `xbacklight`. According to `xrandr`'s man page and my own testing, `xbacklight` **is preferred**. This is because `xrandr` only adjusts brightness via software while `xbacklight` actually makes hardware changes. One way to see this is to compare `xrandr --output 0x46 --brightness 0` with `xbacklight -set 0`. Both claim to set the rightness to zero but `xrandr` only makes everything black while it is clear that the backlight is still on. It appears to only change the gamma settings without physically dimming the backlight. The `xbacklight` method actually turns off the backlight completely.
-
-To try `xrandr` for yourself, replace `0x46` with your monitor's identification code (which can be found with `xrandr --verbose`). One other way to verify that `xbacklight` is better is to look at how [] changes. Its value does nto change when you 
-
-
 Sound keyboard shortcuts
 ---
-`amixer`
+We combine the highly customizable Openbox keyboard shortcuts with the command-line `amixer` function. You can manually toggle mute from the command line with `amixer sset Master toggle` and adjust sound up and down by 5% increments using `amixer sset Master 5%+ unmute` and `amixer sset Master 5%- unmute`. The `unmute` part is optional: leaving it in means that if you adjust the sound while muted, you will automatically unmute. Of course you can also change the 5% to be coarser or finer.
+
+Since it is inconvenient to use the command line each time you want to adjust sound, most will want to map them to keyboard shortcuts. Even though the first row of keys have shortcut (brightness, volume, etc.) icons on them, they in fact physically trigger F1-F10 signals (note there are no F11 or F12 keys). To see this, execute `xev` at the terminal to start a program that captures and outputs key press signals.
+
+I prefer to hold down the Super key (physically located where Caps Lock is usually found but sends the same signal as the Windows key) while hitting F8-F10 to trigger the volume shortcuts. Instructions for creating these shortcuts are below:
+
+In the `/home/username/.config/openbox/rc.xml` file, place the following code chunk between `<keyboard>` and `</keyboard>`:
+```
+    <keybind key="W-F8">
+      <action name="Execute">
+        <command>amixer sset Master toggle</command>
+      </action>
+    </keybind>
+    <keybind key="W-F9">
+      <action name="Execute">
+        <command>amixer sset Master 5%- unmute</command>
+      </action>
+    </keybind>
+    <keybind key="W-F10">
+      <action name="Execute">
+        <command>amixer sset Master 5%+ unmute</command>
+      </action>
+    </keybind>
+```
+
+Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
+
+See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for brightness, page-up/down, home/end, delete, and caps lock). 
+
+Source: [CrunchBang forums](http://crunchbang.org/forums/viewtopic.php?pid=50246) (slightly modified)
+
+Brightness keyboard shortcuts
+---
+Just like the sound shortcuts, we edit the `rc.xml` file, but instead of `amixer` we will use `xbacklight`. A side
+
+There are two options I know of: `xrandr` and `xbacklight`. According to `xrandr`'s man page and my own testing, `xbacklight` **is preferred**. This is because `xrandr` only adjusts brightness via software while `xbacklight` actually makes hardware changes. One way to see this is to compare `xrandr --output 0x46 --brightness 0` with `xbacklight -set 0`. Both claim to set the rightness to zero but `xrandr` only makes everything black while it is clear that the backlight is still on. It appears to only change the gamma settings without physically dimming the backlight. The `xbacklight` method actually turns off the backlight completely.
+
+To try `xrandr` for yourself, replace `0x42` with your monitor's identification code (which can be found in the "Screen 0" entry after using `xrandr --verbose`). One other way to verify that `xbacklight` is better is to look at how `/sys/class/backlight/intel_backlight/brightness` changes. Its value does not change when using `xrandr`, but it does when using `xbacklight`.
+
+Add the following between `<keyboard>` and `</keyboard>` in `rc.xml`.
+
+```
+    <keybind key="W-F6">
+      <action name="Execute">
+        <command>xbacklight - 10</command>
+      </action>
+    </keybind>
+    <keybind key="W-F7">
+      <action name="Execute">
+        <command>xbacklight + 10</command>
+      </action>
+    </keybind>
+```
+
+Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
+
+See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for sound, page-up/down, home/end, delete, and caps lock). 
 
 Keyboard shortcuts for Page-Up, Page-Down, Home, End, Delete, Caps Lock
 ---
-`xdotool`
+The C720 keyboard does not have keys for these functions, so I use the following mappings. The page-up/down and home/end keys are the same default shortcuts that ChromeOS uses. Delete and caps lock are different:
+
+* Page-up: `alt-up`
+* Page-down: `alt-down`
+* Home: `ctrl-alt-up`
+* End: `ctrl-alt-down`
+* Delete: `shift-backspace` (won't be able to hold it down though)
+* Caps lock: `super-F4` (very important for yelling on the internet)
+
+To do so we will take advantage of `xdotools`, which allows you to run keyboard or mouse events from the terminal. Add the following between `<keyboard>` and `</keyboard>` in `rc.xml`.
+
+```
+    <keybind key="A-Up">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Page_Up</command>
+      </action>
+    </keybind>
+    <keybind key="A-Down">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Page_Down</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-Up">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Home</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-Down">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers End</command>
+      </action>
+    </keybind>
+    <keybind key="S-BackSpace">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Delete</command>
+      </action>
+    </keybind>
+    <keybind key="W-F4">
+      <action name="Execute">
+        <command>xdotool key Caps_Lock</command>
+      </action>
+    </keybind>
+```
+
+Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
+
+See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for brightness, and sound).
+
+Source: [xdotool documentation](https://github.com/jordansissel/xdotool) (hosted on GitHub)
