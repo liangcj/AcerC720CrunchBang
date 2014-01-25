@@ -167,22 +167,25 @@ There are two options I know of: `xrandr` and `xbacklight`. According to `xrandr
 
 To try `xrandr` for yourself, replace `0x42` with your monitor's identification code (which can be found in the "Screen 0" entry after using `xrandr --verbose`). One other way to verify that `xbacklight` is better is to look at how `/sys/class/backlight/intel_backlight/brightness` changes. Its value does not change when using `xrandr`, but it does when using `xbacklight`.
 
-Add the following between `<keyboard>` and `</keyboard>` in `rc.xml`.
+Steps:
 
-```
-    <keybind key="W-F6">
-      <action name="Execute">
-        <command>xbacklight - 10</command>
-      </action>
-    </keybind>
-    <keybind key="W-F7">
-      <action name="Execute">
-        <command>xbacklight + 10</command>
-      </action>
-    </keybind>
-```
+* Install `xbacklight` using `sudo apt-get install xbacklight`
+* Add the following between `<keyboard>` and `</keyboard>` in `rc.xml`.
 
-Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
+    ```
+        <keybind key="W-F6">
+          <action name="Execute">
+            <command>xbacklight - 10</command>
+          </action>
+        </keybind>
+        <keybind key="W-F7">
+          <action name="Execute">
+            <command>xbacklight + 10</command>
+          </action>
+        </keybind>
+    ```
+
+* Restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
 See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for sound, page-up/down, home/end, delete, and caps lock). 
 
@@ -197,42 +200,45 @@ The C720 keyboard does not have keys for these functions, so I use the following
 * Delete: `shift-backspace` (won't be able to hold it down though)
 * Caps lock: `super-F4` (very important for yelling on the internet)
 
-To do so we will take advantage of `xdotools`, which allows you to run keyboard or mouse events from the terminal. Add the following between `<keyboard>` and `</keyboard>` in `rc.xml`.
+To do so we will take advantage of `xdotool`, which allows you to run keyboard or mouse events from the terminal. Steps:
 
-```
-    <keybind key="A-Up">
-      <action name="Execute">
-        <command>xdotool key --clearmodifiers Page_Up</command>
-      </action>
-    </keybind>
-    <keybind key="A-Down">
-      <action name="Execute">
-        <command>xdotool key --clearmodifiers Page_Down</command>
-      </action>
-    </keybind>
-    <keybind key="C-A-Up">
-      <action name="Execute">
-        <command>xdotool key --clearmodifiers Home</command>
-      </action>
-    </keybind>
-    <keybind key="C-A-Down">
-      <action name="Execute">
-        <command>xdotool key --clearmodifiers End</command>
-      </action>
-    </keybind>
-    <keybind key="S-BackSpace">
-      <action name="Execute">
-        <command>xdotool key --clearmodifiers Delete</command>
-      </action>
-    </keybind>
-    <keybind key="W-F4">
-      <action name="Execute">
-        <command>xdotool key Caps_Lock</command>
-      </action>
-    </keybind>
-```
+* `ctrl-alt-up` and `ctrl-alt-down` are already mapped to something else in `rc.xml` that I don't use (they are mapped to workspace switching, but I prefer `ctrl-alt-left` and `ctrl-alt-righ` for workspace switching anyway), so comment them out. Roughly lines 196-207, near the start of the `<keyboard>` section. Comment a chunk by enclosing the lines between `<!--` and `-->`
+* Add the following between `<keyboard>` and `</keyboard>` in `rc.xml`.
 
-Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
+    ```
+        <keybind key="A-Up">
+          <action name="Execute">
+            <command>xdotool key --clearmodifiers Page_Up</command>
+          </action>
+        </keybind>
+        <keybind key="A-Down">
+          <action name="Execute">
+            <command>xdotool key --clearmodifiers Page_Down</command>
+          </action>
+        </keybind>
+        <keybind key="C-A-Up">
+          <action name="Execute">
+            <command>xdotool key --clearmodifiers Home</command>
+          </action>
+        </keybind>
+        <keybind key="C-A-Down">
+          <action name="Execute">
+            <command>xdotool key --clearmodifiers End</command>
+          </action>
+        </keybind>
+        <keybind key="S-BackSpace">
+          <action name="Execute">
+            <command>xdotool key --clearmodifiers Delete</command>
+          </action>
+        </keybind>
+        <keybind key="W-F4">
+          <action name="Execute">
+            <command>xdotool key Caps_Lock</command>
+          </action>
+        </keybind>
+    ```
+
+* Restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
 See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for brightness, and sound).
 
