@@ -1,6 +1,8 @@
 CrunchBang Linux on the Acer C720 Chromebook
 ===
-This is a guide for installing and configuring [CrunchBang](http://crunchbang.org/) Linux on the [Acer C720](http://www.theverge.com/2013/10/23/4948120/acer-c720-chromebook-review) [Chromebook](http://en.wikipedia.org/wiki/Chromebook). The majority of the information is combined from various sources and I created this as a central reference. Issues and pull requests are welcome.
+This is a guide for installing and configuring [CrunchBang](http://crunchbang.org/) Linux on the [Acer C720](http://www.theverge.com/2013/10/23/4948120/acer-c720-chromebook-review) [Chromebook](http://en.wikipedia.org/wiki/Chromebook). The majority of the information is combined from various sources and I created this as a central reference.
+
+Any comments or corrections are certainly welcome. Please just submit an issue or a pull request.
 
 Putting Chromebook in developer mode
 ---
@@ -155,7 +157,7 @@ In the `/home/username/.config/openbox/rc.xml` file, place the following code ch
 
 Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
-See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for brightness, page-up/down, home/end, delete, and caps lock). 
+See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide). 
 
 Source: [CrunchBang forums](http://crunchbang.org/forums/viewtopic.php?pid=50246) (slightly modified)
 
@@ -187,7 +189,7 @@ Steps:
 
 * Restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
-See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for sound, page-up/down, home/end, delete, and caps lock). 
+See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide). 
 
 Keyboard shortcuts for Page-Up, Page-Down, Home, End, Delete, Caps Lock
 ---
@@ -214,8 +216,8 @@ To do so we will take advantage of `xdotool`, which allows you to run keyboard o
         <keybind key="A-Down">
           <action name="Execute">
             <command>xdotool key --clearmodifiers Page_Down</command>
-          </action>
         </keybind>
+          </action>
         <keybind key="C-A-Up">
           <action name="Execute">
             <command>xdotool key --clearmodifiers Home</command>
@@ -240,6 +242,38 @@ To do so we will take advantage of `xdotool`, which allows you to run keyboard o
 
 * Restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
-See the `rc.xml` file in this repository for the full, edited file (will also contain other shortcuts for brightness, and sound).
+See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide).
 
 Source: [xdotool documentation](https://github.com/jordansissel/xdotool) (hosted on GitHub)
+
+Shortcuts for maximize/unmaximize window (Windows-like shortcuts)
+---
+By default, CrunchBang includes aero-snap shortcuts for snapping windows to fille the left or right half of the screen, just like you can do in Windows. I also became dependent on shortcuts to maximize or unmaximize a window. This is a bit of a patchy solution that doesn't fully emulate Windows but it's good enough for me. Also, instead of `Super-up` and `Super-down`, we will use `Super-Alt-Up` and `Super-Alt-Down`.
+
+Simply add the following code anywhere between the `<keyboard>` and `</keyboard>`:
+
+```
+    <keybind key="W-A-Up">
+      <action name="Maximize"/>
+    </keybind>
+    <keybind key="W-A-Down">
+      <action name="Unmaximize"/>
+    </keybind>
+```
+
+See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide).
+
+Other shortcut customizations
+---
+Be default, using two finger scroll while the mouse is on the desktop will switch workspaces. While this is useful when using a mousewheel, I found it a bit too sensitive with a touchpad. So I disabled this by commenting out lines 766-771 of `rc.xml`
+
+Specifically, the lines to comment out look like:
+```
+    <mousebind button="Up" action="Click">
+      <action name="GoToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="Down" action="Click">
+      <action name="GoToDesktop"><to>next</to></action>
+    </mousebind>
+```
+See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide).
