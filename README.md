@@ -87,11 +87,11 @@ Once you figure out your preferred synclient settings, list them in `/home/cjl/.
     ````
   The first two options disable the left and right edge slivers. I found this helped with reducing accidental touchpad clicks without compromising usability. The middle three options map singe, double, triple finger taps to what are typically left, right, middle mouse buttons respectively. The last two options adjust touchpad sensitivity to my liking.
 
-See the `autostart` file in this repository for the full, edited file with my preferred settings. 
+See the `autostart` [file in this repository](https://github.com/liangcj/AcerC720CrunchBang/blob/master/autostart) for the full, edited file with my preferred settings. 
 
-Fixing wireless, synaptics, and others
+Fixing wireless, synaptic, and others
 ---
-Once the kernel is updated, [GTK+](http://en.wikipedia.org/wiki/GTK%2B) (graphics-related toolkit) causes issues with the default Waldorf theme, leading to segmentation faults for some programs. Notably, `nm-applet` (the wireless icon in the taskbar) and `synaptics` (package manager) are among the affected.
+Once the kernel is updated, [GTK+](http://en.wikipedia.org/wiki/GTK%2B) (graphics-related toolkit) causes issues with the default Waldorf theme, leading to segmentation faults for some programs. Notably, `nm-applet` (the wireless icon in the taskbar) and `synaptic` (package manager) are among the affected.
 
 Wireless still works, but it would be nice to have the `nm-applet` GUI to make changes. To bring it back (and fix segfaults for other programs too), just select a theme other than Waldorf. This needs to be done as both normal user and sudo though. In terminal:
 ```
@@ -101,7 +101,7 @@ Select a theme other than Waldorf, apply and close
 ```
 sudo lxappearance
 ``` 
-Select a theme other than Waldorf, apply and close. `alt-F2` and then run `nm-applet`.
+Select a theme other than Waldorf, apply and close. I chose "Murrine-Light". `alt-F2` and then run `nm-applet`.
 
 Not a very elegant solution but it works. This also has the added benefit of fixing `synaptic` and other programs. For more technical details see the second link below.
 
