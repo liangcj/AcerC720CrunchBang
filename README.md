@@ -2,10 +2,14 @@ CrunchBang Linux on the Acer C720 Chromebook
 ===
 This is a guide for installing and configuring [CrunchBang](http://crunchbang.org/) Linux on the [Acer C720](http://www.theverge.com/2013/10/23/4948120/acer-c720-chromebook-review) [Chromebook](http://en.wikipedia.org/wiki/Chromebook). The majority of the information is combined from various sources and I created this as a central reference.
 
-Any comments or corrections are certainly welcome. Please just submit an issue or a pull request.
+I have the C720-2800 model, which has a non-touch matte screen, 16GB SSD, and 4GB RAM. This guide should apply to most if not all C720 models, though you may have to look elsewhere for troubleshooting touchscreen support. 
+
+Any comments or corrections, no matter how big or small, are certainly welcome. Please just submit an issue or a pull request.
 
 Putting Chromebook in developer mode
 ---
+This step is needed to make more fundamental changes to your machine. Installing another OS definitely falls in that category.
+
 Steps:
 
 * Boot up Chromebook as you normally would, login, and install all updates (not sure if this is necessary but can't hurt)
@@ -62,11 +66,11 @@ CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kerne
 * Run `sudo apt-get update` to download list of upgrades
 * Run `sudo apt-get dist-upgrade` to upgrade your kernel
 * Reboot
-* Run the c720crunchbangtp script
+* Run the c720crunchbangtp script (either use the [file in my repo](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp) or the one from the below link
 
 Source: [Comment in reddit.com/r/CrunchBang](http://www.reddit.com/r/CrunchBang/comments/1qogy6/crunchbang_on_the_acer_c720_chromebookso_close/) (see post by user ngorgi). I also have copied the user's modified script to this repo in case it gets taken down.
 
-Improving the touchpad performance
+Improving the touchpad's performance
 ---
 These are more personal preferences. Once the touchpad is working via the above steps, some may find the touchpad to still be a bit unresponsive. You can test out touchpad settings (all changes disappear after a restart) using `synclient` in the terminal. Type `synclient` to see a list of touchpad settings and use `man synaptics` for more detailed descriptions of what each setting does. Temporarily try out a setting using e.g. `synclient FingerHigh=10`.
 
@@ -151,28 +155,36 @@ We combine the highly customizable Openbox keyboard shortcuts with the command-l
 
 Since it is inconvenient to use the command line each time you want to adjust sound, most will want to map them to keyboard shortcuts. Even though the first row of keys have shortcut (brightness, volume, etc.) icons on them, they in fact physically trigger F1-F10 signals (note there are no F11 or F12 keys). To see this, execute `xev` at the terminal to start a program that captures and outputs key press signals.
 
-I prefer to hold down the Super key (physically located where Caps Lock is usually found but sends the same signal as the Windows key) while hitting F8-F10 to trigger the volume shortcuts. Instructions for creating these shortcuts are below:
+I prefer to hold down the Super key (physically located where Caps Lock is usually found but sends the same signal as the Windows key) while hitting F8-F10 to trigger the volume shortcuts. In other words, the following shortcuts:
 
-In the `/home/username/.config/openbox/rc.xml` file, place the following code chunk between `<keyboard>` and `</keyboard>`:
-```
-    <keybind key="W-F8">
-      <action name="Execute">
-        <command>amixer sset Master toggle</command>
-      </action>
-    </keybind>
-    <keybind key="W-F9">
-      <action name="Execute">
-        <command>amixer sset Master 5%- unmute</command>
-      </action>
-    </keybind>
-    <keybind key="W-F10">
-      <action name="Execute">
-        <command>amixer sset Master 5%+ unmute</command>
-      </action>
-    </keybind>
-```
+* Toggle mute: `Super-F8`
+* Volume down (and unmute if needed): `Super-F9`
+* Volume up (and unmute if needed): `Super-F10`
 
-Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
+Instructions for creating these shortcuts are below:
+
+* `amixer` should be installed by default. If not (to check, just type `amixer` into the terminal and see if you get an error) then install it with `sudo apt-get install amixer`
+* In the `/home/username/.config/openbox/rc.xml` file, place the following code chunk between `<keyboard>` and `</keyboard>`:
+
+    ```
+        <keybind key="W-F8">
+          <action name="Execute">
+            <command>amixer sset Master toggle</command>
+          </action>
+        </keybind>
+        <keybind key="W-F9">
+          <action name="Execute">
+            <command>amixer sset Master 5%- unmute</command>
+          </action>
+        </keybind>
+        <keybind key="W-F10">
+          <action name="Execute">
+            <command>amixer sset Master 5%+ unmute</command>
+          </action>
+        </keybind>
+    ```
+
+* Make sure you restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
 See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide). 
 
@@ -180,11 +192,16 @@ Source: [CrunchBang forums](http://crunchbang.org/forums/viewtopic.php?pid=50246
 
 Brightness keyboard shortcuts
 ---
-Just like the sound shortcuts, we edit the `rc.xml` file, but instead of `amixer` we will use `xbacklight`. A side
+Just like the sound shortcuts, we edit the `rc.xml` file, but instead of `amixer` we will use `xbacklight`. A side note on `xbacklight` versus `xrandr`, for those curious:
 
-There are two options I know of: `xrandr` and `xbacklight`. According to `xrandr`'s man page and my own testing, `xbacklight` **is preferred**. This is because `xrandr` only adjusts brightness via software while `xbacklight` actually makes hardware changes. One way to see this is to compare `xrandr --output 0x46 --brightness 0` with `xbacklight -set 0`. Both claim to set the rightness to zero but `xrandr` only makes everything black while it is clear that the backlight is still on. It appears to only change the gamma settings without physically dimming the backlight. The `xbacklight` method actually turns off the backlight completely.
+There are two options I researched: `xrandr` and `xbacklight`. According to `xrandr`'s man page and my own testing, `xbacklight` **is preferred**. This is because `xrandr` only adjusts brightness via software while `xbacklight` actually makes hardware changes. One way to see this is to compare `xrandr --output 0x46 --brightness 0` with `xbacklight -set 0`. Both claim to set the rightness to zero but `xrandr` only makes everything black while it is clear that the backlight is still on. It appears to only change the gamma settings without physically dimming the backlight. The `xbacklight` method actually appears to alter the intensity of the backlight.
 
 To try `xrandr` for yourself, replace `0x42` with your monitor's identification code (which can be found in the "Screen 0" entry after using `xrandr --verbose`). One other way to verify that `xbacklight` is better is to look at how `/sys/class/backlight/intel_backlight/brightness` changes. Its value does not change when using `xrandr`, but it does when using `xbacklight`.
+
+The below steps will make the following shortcuts:
+
+* Brightness down: `Super-F6`
+* Brightness up: `Super-F7`
 
 Steps:
 
@@ -206,6 +223,8 @@ Steps:
 
 * Restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
+Note that one current issue with this method is that the numerical value [does not linearly scale with perceived brightness](http://ml.reddit.com/r/chrubuntu/comments/1nyz2o/xbacklight_inc_is_in_linear_scale_very_annoying/). In other words, going from 1% to 5% results in roughly the same perceived brightness increase as going from 5% to 50%. The above link gives a solution to the problem, though I have not personally tested it.
+
 See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide). 
 
 Keyboard shortcuts for Page-Up, Page-Down, Home, End, Delete, Caps Lock
@@ -221,6 +240,7 @@ The C720 keyboard does not have keys for these functions, so I use the following
 
 To do so we will take advantage of `xdotool`, which allows you to run keyboard or mouse events from the terminal. Steps:
 
+* Install `xdotool` if you don't already have it. Use `sudo apt-get install xdotool` if you need to install it.
 * `ctrl-alt-up` and `ctrl-alt-down` are already mapped to something else in `rc.xml` that I don't use (they are mapped to workspace switching, but I prefer `ctrl-alt-left` and `ctrl-alt-righ` for workspace switching anyway), so comment them out. Roughly lines 196-207, near the start of the `<keyboard>` section. Comment a chunk by enclosing the lines between `<!--` and `-->`
 * Add the following between `<keyboard>` and `</keyboard>` in `rc.xml`.
 
@@ -279,6 +299,8 @@ Simply add the following code anywhere between the `<keyboard>` and `</keyboard>
 ```
 
 See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide).
+
+Source: [openbox.org wiki](http://openbox.org/wiki/Help:Bindings)
 
 Other shortcut customizations
 ---
