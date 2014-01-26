@@ -66,7 +66,7 @@ CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kerne
 * Run `sudo apt-get update` to download list of upgrades
 * Run `sudo apt-get dist-upgrade` to upgrade your kernel
 * Reboot
-* Run the c720crunchbangtp script (either use the [file in my repo](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp) or the one from the below link
+* Run the c720crunchbangtp script (either use the [file in my repo](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp) or the one from the below link)
 
 Source: [Comment in reddit.com/r/CrunchBang](http://www.reddit.com/r/CrunchBang/comments/1qogy6/crunchbang_on_the_acer_c720_chromebookso_close/) (see post by user ngorgi). I also have copied the user's modified script to this repo in case it gets taken down.
 
