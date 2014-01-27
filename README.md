@@ -285,18 +285,27 @@ Source: [xdotool documentation](https://github.com/jordansissel/xdotool) (hosted
 
 Shortcuts for maximize/unmaximize window (Windows-like shortcuts)
 ---
-By default, CrunchBang includes aero-snap shortcuts for snapping windows to fille the left or right half of the screen, just like you can do in Windows. I also became dependent on shortcuts to maximize or unmaximize a window. This is a bit of a patchy solution that doesn't fully emulate Windows but it's good enough for me. Also, instead of `Super-up` and `Super-down`, we will use `Super-Alt-Up` and `Super-Alt-Down`.
+By default, CrunchBang includes aero-snap shortcuts for snapping windows to fill the left or right half of the screen, just like you can do in Windows. I also became dependent on shortcuts to maximize or unmaximize a window. This is a bit of a patchy solution that doesn't fully emulate Windows but it's good enough for me. Also, instead of `Super-up` and `Super-down`, we will use `Super-Alt-Up` and `Super-Alt-Down`.
 
-Simply add the following code anywhere between the `<keyboard>` and `</keyboard>`:
+To summarize, we will make the following shortcuts:
 
-```
-    <keybind key="W-A-Up">
-      <action name="Maximize"/>
-    </keybind>
-    <keybind key="W-A-Down">
-      <action name="Unmaximize"/>
-    </keybind>
-```
+* Maximize focused window: `Super-Alt-Up`
+* Unmaximize focused window: `Super-Alt-Down`
+
+Steps:
+
+* Simply add the following code anywhere between the `<keyboard>` and `</keyboard>`:
+
+    ```
+        <keybind key="W-A-Up">
+          <action name="Maximize"/>
+        </keybind>
+        <keybind key="W-A-Down">
+          <action name="Unmaximize"/>
+        </keybind>
+    ```
+
+* Restart Openbox (`Super-Space` ==> Settings ==> Openbox ==> Restart) to put the changes into effect.
 
 See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide).
 
