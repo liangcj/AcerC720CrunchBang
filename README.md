@@ -316,3 +316,7 @@ Specifically, the lines to comment out look like:
     </mousebind>
 ```
 See the `rc.xml` file in this repository for the full, edited file (will also contain modifications for all other shortcuts mentioned in this guide).
+
+Upgrading the SSD drive
+---
+The androidcentral.com website has a [detailed guide](http://www.androidcentral.com/how-upgrade-ssd-your-acer-c720-chromebook) for upgrading the Acer C720 SSD. Note that this will void the warranty.
