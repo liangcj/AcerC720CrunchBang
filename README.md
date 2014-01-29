@@ -1,6 +1,6 @@
 CrunchBang Linux on the Acer C720 Chromebook
 ===
-This is a guide for installing and configuring [CrunchBang](http://crunchbang.org/) Linux on the [Acer C720](http://www.theverge.com/2013/10/23/4948120/acer-c720-chromebook-review) [Chromebook](http://en.wikipedia.org/wiki/Chromebook). The majority of the information is combined from various sources and I created this as a central reference.
+This is a guide for installing and configuring [CrunchBang](http://crunchbang.org/) Linux on the [Acer C720](http://www.theverge.com/2013/10/23/4948120/acer-c720-chromebook-review) [Chromebook](http://en.wikipedia.org/wiki/Chromebook). Note that this method, unlike [Crouton](https://github.com/dnschneid/crouton) or [Chrubuntu](http://chromeos-cr48.blogspot.com/), is for those who want to wipe ChromeOS and just run Linux. The majority of the information is combined from various sources and I created this as a central reference.
 
 I have the C720-2800 model, which has a non-touch matte screen, 16GB SSD, and 4GB RAM. This guide should apply to most if not all C720 models, though you may have to look elsewhere for troubleshooting touchscreen support. 
 
@@ -38,12 +38,12 @@ Note: if you have [upgraded](http://www.amazon.com/MyDigitalSSD-Super-Cache-Soli
 
 Installation
 ---
-Basically the key is to modify one of the boot parameters with `mem=1536m`, or else you will get a "not enough memory" error when you try to install or even run a live demo.
+Basically the key is to modify one of the boot parameters with `mem=1536m`, or else you will get a "not enough memory" error when you try to install or even run a live session.
 
 * Create CrunchBang [.iso](http://crunchbang.org/download/) (64-bit) using [Universal USB Installer](http://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/)
 * Reboot computer with USB drive plugged in
 * At white splash screen press `ctrl-L` (note, NOT `ctrl-D`) to boot from USB drive
-* Highlight "install CrunchBang" option (don't select it yet!)
+* Highlight "Install" option (don't select it yet!)
 * Press `Tab`, which will bring up a prompt at the bottom of your screen. Add a space to the end of the command and then add
 
     ```
