@@ -6,6 +6,8 @@ I have the C720-2800 model, which has a non-touch matte screen, 16GB SSD, and 4G
 
 Any comments or corrections, no matter how big or small, are certainly welcome. Please just submit an issue or a pull request.
 
+**Update (2014 Feb 1):** I have been running this setup for about 2 weeks and everything has been great. Battery life is around 7-9 hours. Suspending it overnight will only run a few percent off the battery. Having 5-10 Chrome tabs open plus a couple terminals uses about 1.5GB of RAM, and this is after about a week of no reboots (just suspends). Installed all the scientific computing tools I need (R, RStudio, TeX Live, Git, Sublime Text 2, Dropbox) and am only at ~6.5GB of disk usage. Browsing is responsive and I am even able to do light scientific computing. I no longer have to worry about bringing a charger with me to get in a full day of work.
+
 Putting Chromebook in developer mode
 ---
 This step is needed to make more fundamental changes to your machine. Installing another OS definitely falls in that category.
