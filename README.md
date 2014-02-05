@@ -70,6 +70,15 @@ CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kerne
 * Reboot
 * Run the c720crunchbangtp script (either use the [file in my repo](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp) or the one from the below link)
 
+**NOTE (2014 Feb 5):** The kernel version may matter in whether this script works or not (particularly the part that applies [Benson Leung's](https://plus.google.com/+BensonLeung/posts/TrQkycuT3Km) patches). Benson Leung has sent his patches upstream so hopefully with newer versions of the kernel, this manual patching will no longer be needed. As [outlined by user jonwalch](https://github.com/liangcj/AcerC720CrunchBang/issues/1), one fix is to modify the `Grab Ubuntu kernel source` portion of the script to:
+
+```
+# Grab Ubuntu kernel source
+wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.12.5.tar.xz
+tar -xJf linux-3.12.5.tar.xz
+cd linux-3.12.5
+```
+
 Source: [Comment in reddit.com/r/CrunchBang](http://www.reddit.com/r/CrunchBang/comments/1qogy6/crunchbang_on_the_acer_c720_chromebookso_close/) (see post by user ngorgi). I also have copied the user's modified script to this repo in case it gets taken down.
 
 Improving the touchpad's performance
@@ -110,6 +119,8 @@ sudo lxappearance
 Select a theme other than Waldorf, apply and close. I chose "Murrine-Light". `alt-F2` and then run `nm-applet`.
 
 Not a very elegant solution but it works. This also has the added benefit of fixing `synaptic` and other programs. For more technical details see the second link below.
+
+**NOTE (2014 Feb 5)**: [User jsharf has reported](https://github.com/liangcj/AcerC720CrunchBang/issues/2) that they had Wi-Fi performance issues after installing CrunchBang. The issue was fixed by disabling hardware encryption by adding the line `options ath9k nohwcrypt=1` to `/etc/modprobe.d/ath9k.conf` and rebooting. [(Source)](http://ubuntuforums.org/showthread.php?t=2196787)
 
 Source: [CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?id=27765) and [another CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?pid=310612#p310612)
 
