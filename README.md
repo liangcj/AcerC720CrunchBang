@@ -56,7 +56,7 @@ Basically the key is to modify one of the boot parameters with `mem=1536m`, or e
 
 Rest assured this will not affect the amount of memory available to your system once everything is installed. For example, I have the 4GB RAM Acer C720 and all of my RAM was available to me.
 
-Also **NOTE**: once CrunchBang is installed, when you turn on your computer you will see a white splash screen. Continue using `ctrl-L` instead of `ctrl-D` to fire up GRUB, from where you can then boot up CrunchBang.
+Also **NOTE**: once CrunchBang is installed, when you turn on your computer you will see a white splash screen. Continue using `ctrl-L` instead of `ctrl-D` to fire up GRUB, from where you can then boot up CrunchBang. Do **NOT** hit the space bar and proceed, or [your system may be wiped](http://www.reddit.com/r/chrubuntu/comments/1v7i0i/what_will_happen_if_i_press_the_spacebar_on_the/).
 
 Sources: [CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?pid=348696) (post #8 - actually uses `mem=1075m`; either one should work) and [Arch Linux Acer C720 wiki](https://wiki.archlinux.org/index.php/Acer_C720_Chromebook)
 
