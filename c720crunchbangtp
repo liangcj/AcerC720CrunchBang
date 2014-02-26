@@ -1,6 +1,6 @@
 # Create a temp directory for our work
-mkdir ~/c270patch
-cd ~/c270patch
+mkdir ~/c720patch
+cd ~/c720patch
 
 # Determine kernel version (with and without Ubuntu-specific suffix)
 mykern=${1:-$(uname -r)}
