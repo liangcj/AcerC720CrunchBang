@@ -66,7 +66,8 @@ CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kerne
 
 * Modify `/etc/apt/sources.list` and `/etc/apt/preferences` so that `waldorf` is replaced with `janice`, and `wheezy` is replaced with `jessie`. Leave the Debian security sources as `wheezy` though. Also uncomment the debian-src lines.
 * Run `sudo apt-get update` to download list of upgrades
-* Run `sudo apt-get dist-upgrade` to upgrade your kernel
+* **NOTE (2014 April 21):** As [noted by user Akko1](https://github.com/liangcj/AcerC720CrunchBang/issues/4), as of this update, the latest kernel may actually be "too new". It is confirmed that 3.12.5 works, so either upgrade or downgrade to it as needed.
+* Run `sudo apt-get dist-upgrade` to upgrade your kernel (though see previous bullet point)
 * Reboot
 * Run the c720crunchbangtp script (either use the [file in my repo](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp) or the one from the below link)
 
