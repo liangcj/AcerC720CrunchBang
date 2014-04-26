@@ -62,6 +62,8 @@ Sources: [CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?pid=
 
 Getting the touchpad working
 ---
+**UPDATE (2014 April 26):** As [noted by user rofellos51 and confirmed by user chislon](https://github.com/liangcj/AcerC720CrunchBang/issues/5), `chromeos_laptop.c` was moved from `drivers/platform/x86` to `drivers/platform/chrome`. Thus for those who want to use the newer kernel 3.13, please use the [c720crunchbangtp_v2 script](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp_v2). Instead of the c720crunchbangtp script mentioned below.
+
 CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kernel (to 3.12 at time of this post), and then run a patching script (originally written for Ubuntu and slightly modified to work with CrunchBang). Steps:
 
 * Modify `/etc/apt/sources.list` and `/etc/apt/preferences` so that `waldorf` is replaced with `janice`, and `wheezy` is replaced with `jessie`. Leave the Debian security sources as `wheezy` though. Also uncomment the debian-src lines.
