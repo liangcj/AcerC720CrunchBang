@@ -129,6 +129,8 @@ Source: [CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?id=27
 
 Fixing suspend
 ---
+**UPDATE (2014 May 4):** As per [user chislon's note](https://github.com/liangcj/AcerC720CrunchBang/issues/7), a Reddit user has [posted a fix](http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o) for those using kernel 3.13. For older kernel 3.12, the below instructions should still work.
+
 Steps:
 
 * Update the `rc.local` file in `/etc` to look like the [version in this repository](https://github.com/liangcj/AcerC720CrunchBang/blob/master/rc.local). Check the [history](https://github.com/liangcj/AcerC720CrunchBang/commits/master/rc.local) for the original version if curious. Basically you add the following lines to the file:
