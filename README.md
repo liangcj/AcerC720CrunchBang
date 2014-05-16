@@ -102,8 +102,9 @@ Once you figure out your preferred synclient settings, list them in `/home/cjl/.
     synclient TapButton3=2 &
     synclient FingerHigh=10 &
     synclient FingerLow=10 &
+    synclient MaxTapMove=20 &
     ````
-  The first two options disable the left and right edge slivers. I found this helped with reducing accidental touchpad clicks without compromising usability. The middle three options map singe, double, triple finger taps to what are typically left, right, middle mouse buttons respectively. The last two options adjust touchpad sensitivity to my liking.
+  The first two options disable the left and right edge slivers - I found this helped with reducing accidental touchpad clicks without compromising usability. The next three `TapButton` options map single, double, triple finger taps to what are typically left, right, middle mouse buttons respectively. The next two `FingerHigh/Low` options adjust touchpad sensitivity to my liking. The last `MaxTapMove` option reduces the maximum finger movement allowed to still register as a tap - I added this mainly so short two-finger swipes are not detected as two-finger taps too.
 
 See the `autostart` [file in this repository](https://github.com/liangcj/AcerC720CrunchBang/blob/master/autostart) for the full, edited file with my preferred settings. 
 
