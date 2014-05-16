@@ -58,6 +58,7 @@ if egrep -iq 'trackpad' /proc/bus/input/devices; then
     synclient TapButton3=2 &
     synclient FingerHigh=10 &
     synclient FingerLow=10 &
+    synclient MaxTapMove=20 &
 fi
 
 ## Start xscreensaver
