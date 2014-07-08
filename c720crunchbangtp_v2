@@ -4,6 +4,7 @@ cd ~/c720patch
 
 # Determine kernel version (with and without Ubuntu-specific suffix)
 mykern=${1:-$(uname -r)}
+mykernsrc=$(uname -v | cut -d' ' -f4)
 
 sudo apt-get update
 
@@ -12,7 +13,7 @@ sudo apt-get build-dep -y --no-install-recommends linux
 
 # Grab Ubuntu kernel source
 sudo apt-get install linux-headers-$mykern
-apt-get source linux
+apt-get source linux=$mykernsrc
 cd linux*
 
 # Use Benson Leung's post-Pixel Chromebook patches:
