@@ -64,7 +64,7 @@ Getting the touchpad working
 ---
 CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kernel, and then run a patching script.
 
-**UPDATE (2014 July 7):** Many users have had issues with this step, largely since previous versions of this guide recommended using `sudo apt-get dist-upgrade` with the `jessie` repos, which will upgrade your kernel to whichever one is currently in the Debian Testing release. However, sometimes a kernel that is "too new" may break compatibility with the touchpad. Since the 3.12 kernel is confirmed to work with the touchpad, I recommend just upgrading to that one via backports, rather than risk having incompatibilities with whichever the latest Wheezy kernel is.
+**UPDATE (2014 July 7):** Many users have had issues with this step, largely since previous versions of this guide recommended using `sudo apt-get dist-upgrade` with the `jessie` repos, which will upgrade your kernel to whichever one is currently in the Debian Testing release. However, sometimes a kernel that is "too new" may break compatibility with the touchpad. Since the 3.12 kernel is confirmed to work with the touchpad, I recommend just upgrading to that one via backports, rather than risk having incompatibilities with whichever the latest jessie kernel is.
 
 Below are the steps I recommend.
 
