@@ -62,27 +62,27 @@ Sources: [CrunchBang forum post](http://crunchbang.org/forums/viewtopic.php?pid=
 
 Getting the touchpad working
 ---
-**UPDATE (2014 April 26):** As [noted by user rofellos51 and confirmed by user chislon](https://github.com/liangcj/AcerC720CrunchBang/issues/5), `chromeos_laptop.c` was moved from `drivers/platform/x86` to `drivers/platform/chrome`. Thus for those who want to use the newer kernel 3.13, please use the [c720crunchbangtp_v2 script](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp_v2) instead of the c720crunchbangtp script mentioned below.
+CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kernel, and then run a patching script.
 
-CrunchBang Waldorf uses a fairly old kernel (3.2) so we need to update the kernel (to 3.12 at time of this post), and then run a patching script (originally written for Ubuntu and slightly modified to work with CrunchBang). Steps:
+**UPDATE (2014 July 7):** Many users have had issues with this step, largely since previous versions of this guide recommended using `sudo apt-get dist-upgrade` with the `jessie` repos, which will upgrade your kernel to whichever one is currently in the Debian Testing release. However, sometimes a kernel that is "too new" may break compatibility with the touchpad. Since the 3.12 kernel is confirmed to work with the touchpad, I recommend just upgrading to that one via backports, rather than risk having incompatibilities with whichever the latest Wheezy kernel is.
 
-* Modify `/etc/apt/sources.list` and `/etc/apt/preferences` so that `waldorf` is replaced with `janice`, and `wheezy` is replaced with `jessie`. Leave the Debian security sources as `wheezy` though. Also uncomment the debian-src lines.
+Below are the steps I recommend.
+
+* Add the following lines to `/etc/apt/sources.list`:
+
+    ````
+    deb http://http.debian.net/debian wheezy-backports main
+    deb-src http://http.debian.net/debian wheezy-backports main
+    ````
 * Run `sudo apt-get update` to download list of upgrades
-* **NOTE (2014 April 21):** As [noted by user Akko1](https://github.com/liangcj/AcerC720CrunchBang/issues/4), as of this update, the latest kernel may actually be "too new". It is confirmed that 3.12.5 works, so either upgrade or downgrade to it as needed.
-* Run `sudo apt-get dist-upgrade` to upgrade your kernel (though see previous bullet point)
-* Reboot
-* Run the c720crunchbangtp script (either use the [file in my repo](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp) or the one from the below link)
+* Run `sudo apt-get install linux-image-3.12-0.bpo.1-amd64 -t wheezy-backports` to upgrade your kernel. The `-t wheezy-backports` is necessary so that a `initramfs-tools` dependency will also be upgraded
+* Reboot. Your kernel should now be upgraded to 3.12 (you can double check using `uname -r`)
+* Run the [c720crunchbangtp_v3 script](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp_v3) script
+* Reboot. Touchpad should be working.
 
-**NOTE (2014 Feb 5):** The kernel version may matter in whether this script works or not (particularly the part that applies [Benson Leung's](https://plus.google.com/+BensonLeung/posts/TrQkycuT3Km) patches). Benson Leung has sent his patches upstream so hopefully with newer versions of the kernel, this manual patching will no longer be needed. As [outlined by user jonwalch](https://github.com/liangcj/AcerC720CrunchBang/issues/1), one fix is to modify the `Grab Ubuntu kernel source` portion of the script to:
+If you want to instead use kernel 3.13, note that the file `chromeos_laptop.c` was moved from `drivers/platform/x86` to `drivers/platform/chrome`. Thus, please use the [c720crunchbangtp_v2 script](https://github.com/liangcj/AcerC720CrunchBang/blob/master/c720crunchbangtp_v2) instead. I haven't personally tested this yet though, so feel free to report issues with this.
 
-```
-# Grab Ubuntu kernel source
-wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.12.5.tar.xz
-tar -xJf linux-3.12.5.tar.xz
-cd linux-3.12.5
-```
-
-Source: [Comment in reddit.com/r/CrunchBang](http://www.reddit.com/r/CrunchBang/comments/1qogy6/crunchbang_on_the_acer_c720_chromebookso_close/) (see post by user ngorgi). I also have copied the user's modified script to this repo in case it gets taken down.
+Source: [Benson Leung's patches](https://plus.google.com/+BensonLeung/posts/TrQkycuT3Km). [Comment in reddit.com/r/CrunchBang](http://www.reddit.com/r/CrunchBang/comments/1qogy6/crunchbang_on_the_acer_c720_chromebookso_close/) (see post by user ngorgi). [CrunchBang forums](http://crunchbang.org/forums/viewtopic.php?pid=379918) and [Debian forums](http://forums.debian.net/viewtopic.php?f=10&t=107794) for updating kernel via backports. Thanks to users [jonwalch](https://github.com/liangcj/AcerC720CrunchBang/issues/1), [Akko1](https://github.com/liangcj/AcerC720CrunchBang/issues/4), [rofellos51, and chislon](https://github.com/liangcj/AcerC720CrunchBang/issues/5) for contributing issues and fixes here.
 
 Improving the touchpad's performance
 ---
